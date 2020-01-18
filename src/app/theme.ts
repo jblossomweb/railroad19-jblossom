@@ -8,6 +8,11 @@ const Theme = styled.div`
     color: ${palette.BLACK};
   }
 
+  .ui.table thead th {
+    background-color: ${palette.NAVY};
+    color: ${palette.WHITE};
+  }
+
   a,
   .anchor {
     cursor: pointer;
