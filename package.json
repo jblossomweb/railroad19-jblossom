@@ -1,0 +1,88 @@
+{
+  "name": "railroad19-jblossom",
+  "description": "UI/UX Code Challenge",
+  "version": "0.0.1",
+  "private": false,
+  "scripts": {
+    "start": "PORT=3000 react-scripts start",
+    "lint": "tsc && tslint -c tslint.json -p tsconfig.json",
+    "test": "react-scripts test",
+    "test-ci": "CI=true react-scripts test",
+    "build": "react-scripts build",
+    "ship": "yarn lint && yarn test-ci && yarn build && firebase deploy",
+    "coverage": "react-scripts test --env=jsdom --coverage --no-cache --watchAll=false",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "build-storybook": "build-storybook -o .storybook/build",
+    "ship-storybook": "yarn build-storybook && cd .storybook && firebase deploy && cd .."
+
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/app/**/*.{js,jsx,ts,tsx}",
+      "!src/app/**/*.style.{js,jsx,ts,tsx}",
+      "!src/app/**/*.stories.{js,jsx,ts,tsx}",
+      "!src/app/**/*.test.{js,jsx,ts,tsx}",
+      "!src/app/config.{js,jsx,ts,tsx}"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "connected-react-router": "^6.6.1",
+    "history": "^4.10.1",
+    "immutable": "^4.0.0-rc.12",
+    "lodash": "^4.17.15",
+    "polished": "^3.4.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "redux": "^4.0.4",
+    "redux-immutable": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.1",
+    "styled-components": "^4.4.1",
+    "typescript": "3.7.2",
+    "window-or-global": "^1.0.1",
+    "with-immutable-props-to-js": "^2.0.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-knobs": "5.3.5",
+    "@storybook/preset-create-react-app": "^1.5.2",
+    "@storybook/react": "5.3.5",
+    "@types/enzyme": "^3.10.3",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/history": "^4.7.3",
+    "@types/jest": "^24.0.23",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^12.12.14",
+    "@types/react": "^16.9.13",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-redux": "^7.1.5",
+    "@types/react-router-dom": "^5.1.3",
+    "@types/redux-immutable": "^4.0.1",
+    "@types/styled-components": "^4.4.0",
+    "@types/window-or-global": "^1.0.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "1.18.0"
+  }
+}
