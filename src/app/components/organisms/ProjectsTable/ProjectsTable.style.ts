@@ -10,13 +10,13 @@ export const TableHeaderCell = styled(Table.HeaderCell)`
 
 export const TableCell = styled(Table.Cell)`
   background: ${
-    ({ sorting }) => sorting ? palette.COLUMBIA : palette.WHITE
+    props => props['data-sorting'] ? palette.COLUMBIA : palette.WHITE
   }
 `;
 
 export const SortIcon = styled(Icon)`
   color: ${
-    ({ sorting }) => sorting ? palette.YELLOW : palette.WHITE
+    props => props['data-sorting'] ? palette.YELLOW : palette.WHITE
   };
   cursor: pointer;
   position: absolute;

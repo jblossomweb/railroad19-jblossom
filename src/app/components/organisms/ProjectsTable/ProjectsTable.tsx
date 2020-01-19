@@ -7,27 +7,24 @@ import {
 } from 'semantic-ui-react';
 
 import { upperCaseFirstLetter } from 'core/string';
-import {
-  Projects,
-  Project,
-} from 'app/types';
+import { formatDataDisplay } from 'app/utils';
+import * as AppTypes from 'app/types';
 
 import * as Style from './ProjectsTable.style';
 
 export interface Props {
-  projects: Projects,
-  displayColumns?: Array<keyof Project>,
+  projects: AppTypes.Projects,
+  visibleColumns?: Array<keyof AppTypes.Project>,
 };
 
 export interface State {
-  sortedData: Projects,
-  sortColumn?: keyof Project,
+  sortColumn?: keyof AppTypes.Project,
   sortDirection?: StrictTableHeaderCellProps['sorted'],
 };
 
 const ProjectsTable: React.FC<Props> = ({
   projects,
-  displayColumns = [
+  visibleColumns = [
     'title',
     'division',
     'project_owner',
@@ -38,21 +35,17 @@ const ProjectsTable: React.FC<Props> = ({
   ],
 }) => {
   const [{
-    sortedData,
     sortColumn,
     sortDirection,
-  }, setState] = useState<State>({
-    sortedData: projects,
-  });
+  }, setState] = useState<State>({});
 
   const sortByColumn = (
-    column: keyof Project,
+    column: keyof AppTypes.Project,
   ) => {
     if (sortColumn !== column) {
       setState({
         sortColumn: column,
         sortDirection: 'ascending',
-        sortedData: sortBy(sortedData, column),
       });
     } else {
       setState({
@@ -62,22 +55,21 @@ const ProjectsTable: React.FC<Props> = ({
           'descending' :
           'ascending'
         ,
-        sortedData: sortedData.reverse(),
       });
     }
   };
 
   const renderHeaderCell = (
-    column: keyof Project,
+    column: keyof AppTypes.Project,
   ) => (
-    <Style.TableHeaderCell>
+    <Style.TableHeaderCell key={column}>
       {
         column === 'project_owner' ?
         'Project Owner' :
         upperCaseFirstLetter(column)
       }
       <Style.SortIcon
-        sorting={sortColumn === column}
+        data-sorting={sortColumn === column}
         name={(
           sortColumn === column ?
           `sort ${sortDirection}` :
@@ -88,25 +80,36 @@ const ProjectsTable: React.FC<Props> = ({
     </Style.TableHeaderCell>
   );
 
+  const sortedData =
+    sortColumn ?
+    (
+      sortDirection === 'ascending' ?
+      sortBy(projects, sortColumn) :
+      sortBy(projects, sortColumn).reverse()
+    ) : projects
+  ;
+
   return (
     <Table celled fixed>
       <Table.Header>
         <Table.Row>
-          {displayColumns.map(renderHeaderCell)}
+          {visibleColumns.map(renderHeaderCell)}
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {sortedData.map((
-          row: Project,
+        {sortedData && sortedData.map((
+          row: AppTypes.Project,
           index: number,
         ) => (
           <Table.Row key={index}>
-            {displayColumns.map((column: keyof Project) => (
+            {visibleColumns.map((
+              column: keyof AppTypes.Project,
+            ) => (
               <Style.TableCell
                 key={column}
-                sorting={sortColumn === column}
+                data-sorting={sortColumn === column}
               >
-                {row[column]}
+                {formatDataDisplay(column, row[column])}
               </Style.TableCell>
             ))}
           </Table.Row>

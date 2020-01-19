@@ -37,8 +37,12 @@ export interface AppReducers {
   [key: string]: AppReducer,
 };
 
-export const getInitialState: () => AppState = () => loadState() || Map(fromJS({
-  app: {}
+export const getInitialState: (
+  defaultAppState?: any,
+) => AppState = defaultAppState => loadState() || Map(fromJS({
+  app: {
+    ...defaultAppState,
+  }
 }));
 
 const getEnhancers = () => {

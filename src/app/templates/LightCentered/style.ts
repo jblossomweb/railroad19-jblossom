@@ -12,6 +12,6 @@ export const Header = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: top;
   color: ${palette.BLACK};
 `;

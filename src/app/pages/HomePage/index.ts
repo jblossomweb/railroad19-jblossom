@@ -4,25 +4,33 @@ import withImmutablePropsToJS from 'with-immutable-props-to-js';
 
 import { AppState } from 'core/store';
 
-// import * as storeActions from 'app/store/<store>/action/creators';
-// import * as storeSelectors from 'app/store/<store>/selectors';
-import mockProjects from 'app/__mocks__/projects.json';
+import * as projectsActions from 'app/store/projects/action/creators';
+import * as projectsSelectors from 'app/store/projects/selectors';
+
+import { ProjectFilter } from 'app/types';
 
 import HomePage from './HomePage';
 
 export const mapStateToProps = (
   state: AppState,
 ) => ({
-  // fetching: storeSelectors.getFetching(state),
-  projects: mockProjects,
+  allProjects: projectsSelectors.getProjects(state),
+  appliedFilters: projectsSelectors.getAppliedFilters(state),
+  filteredRows: projectsSelectors.getFilteredRows(state),
+  divisions: projectsSelectors.getDivisions(state),
+  projectOwners: projectsSelectors.getProjectOwners(state),
+  statuses: projectsSelectors.getStatuses(state),
 });
 
 export const mapDispatchToProps = (
   dispatch: Dispatch<AnyAction>,
 ) => ({
-  // shorten: (longUrl: string) => dispatch(
-  //   storeActions.requestShorten(longUrl)
-  // ),
+  applyFilter: (filter: ProjectFilter) => dispatch(
+    projectsActions.applyFilter(filter),
+  ),
+  removeFilter: (key: number) => dispatch(
+    projectsActions.removeFilter(key),
+  ),
 });
 
 export default connect(

@@ -10,7 +10,11 @@ import rootReducer from 'app/store/rootReducer';
 import Theme from 'app/theme';
 import { redirects, routes } from './routes';
 
-const store = composeStore(getInitialState(), rootReducer);
+import projectsInitialState from 'app/store/projects/initialState';
+
+const store = composeStore(getInitialState({
+  projects: projectsInitialState,
+}), rootReducer);
 
 const App: React.FC = () => (
   <Theme>
