@@ -1,0 +1,10 @@
+[
+  {
+    "message": "saved!",
+    "icon": "check"
+  },
+  {
+    "message": "error!",
+    "icon": "error"
+  }
+]

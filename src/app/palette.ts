@@ -7,6 +7,7 @@ const palette: Palette = {
   NAVY: '#092C5C',
   COLUMBIA: '#8FBCE6',
   YELLOW: '#F5D130',
+  LIGHT_GREEN: '#EBFDE2',
 };
 
 export default palette;

@@ -22,6 +22,7 @@ export interface Props {
   projectOwners: Array<AppTypes.Project['project_owner']>,
   statuses: Array<AppTypes.Project['status']>,
   updateProject: (key: number, update: Partial<AppTypes.Project>) => void,
+  addNotification: (message: string, icon: SemanticICONS) => void,
 };
 
 export interface State {
@@ -37,6 +38,7 @@ const ProjectsTable: React.FC<Props> = ({
   projectOwners,
   projects,
   updateProject,
+  addNotification,
   visibleColumns = [
     'title',
     'division',
@@ -115,7 +117,7 @@ const ProjectsTable: React.FC<Props> = ({
         [editingField]: updatedValue,
       };
       updateProject(editingIndex, update);
-      // TODO: fire a toast notification action
+      addNotification('saved!', 'save');
       clearEdit();
     }
   };
@@ -144,7 +146,7 @@ const ProjectsTable: React.FC<Props> = ({
   const renderEditField = (
     rowIndex: number,
     column: keyof AppTypes.Project,
-    modified?: boolean,
+    changed?: boolean,
   ) => (
     <>
       <FocusInput
@@ -165,7 +167,7 @@ const ProjectsTable: React.FC<Props> = ({
         onKeyDown={(e: React.KeyboardEvent) => {
           e.stopPropagation();
           if (e.key === 'Enter') {
-            saveEdit();
+            changed ? saveEdit() : clearEdit();
           }
           if (e.key === 'Escape') {
             clearEdit();
@@ -175,7 +177,7 @@ const ProjectsTable: React.FC<Props> = ({
           valueEdit(data.value);
         }}
         onBlur={() => {
-          if (!modified) {
+          if (!changed) {
             clearEdit();
           }
         }}
@@ -195,7 +197,8 @@ const ProjectsTable: React.FC<Props> = ({
     column: keyof AppTypes.Project,
     originalValue?: any,
   ) => {
-    if (editingValue !== String(originalValue)) {
+    const changed: boolean = editingValue !== String(originalValue);
+    if (changed) {
       return (
         <Popup
           inverted
@@ -204,7 +207,7 @@ const ProjectsTable: React.FC<Props> = ({
           pinned
           trigger={(
             <div>
-              {renderEditField(rowIndex, column, true)}
+              {renderEditField(rowIndex, column, changed)}
             </div>
           )}
           content={(
@@ -225,7 +228,7 @@ const ProjectsTable: React.FC<Props> = ({
         />
       );
     }
-    return renderEditField(rowIndex, column);
+    return renderEditField(rowIndex, column, changed);
   };
 
   const sortedData =
@@ -247,7 +250,6 @@ const ProjectsTable: React.FC<Props> = ({
       <Table.Body>
         {sortedData && sortedData.map((
           row: AppTypes.IndexedProject,
-          // sortedIndex: number,
         ) => (
           <Table.Row key={row.index}>
             {visibleColumns.map((
@@ -279,7 +281,6 @@ const ProjectsTable: React.FC<Props> = ({
                 ) ? (
                   <>
                     {renderEditFieldWithPopup(row.index, column, row[column])}
-                    {/* <Icon name={`save`} /> */}
                   </>
                 ) : (
                   <>

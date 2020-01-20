@@ -1,3 +1,7 @@
+import {
+  SemanticICONS,
+} from 'semantic-ui-react';
+
 export interface BaseProject {
   title: string,
   division: string,
@@ -34,3 +38,10 @@ export interface ProjectFilter {
 };
 
 export type ProjectFilters = ProjectFilter[];
+
+export interface Notification {
+  message: string,
+  icon: SemanticICONS,
+};
+
+export type Notifications = Notification[];

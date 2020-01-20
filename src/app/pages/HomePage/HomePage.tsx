@@ -1,11 +1,13 @@
 import React from 'react';
 import {
   Container,
+  SemanticICONS,
 } from 'semantic-ui-react';
 
 import * as AppTypes from 'app/types';
 import Template from 'app/templates/LightCentered';
 
+import Notifications from 'app/components/organisms/Notifications';
 import ProjectsTable from 'app/components/organisms/ProjectsTable';
 import ProjectsFilter from 'app/components/organisms/ProjectsFilter';
 
@@ -18,9 +20,12 @@ export interface Props {
   divisions: Array<AppTypes.Project['division']>,
   projectOwners: Array<AppTypes.Project['project_owner']>,
   statuses: Array<AppTypes.Project['status']>,
+  notifications: AppTypes.Notifications,
   applyFilter: (filter: AppTypes.ProjectFilter) => void,
   removeFilter: (key: number) => void,
   updateProject: (key: number, update: Partial<AppTypes.Project>) => void,
+  addNotification: (message: string, icon: SemanticICONS) => void,
+  removeNotification: (key: number) => void,
 };
 
 const HomePage: React.FC<Props> = ({
@@ -33,10 +38,17 @@ const HomePage: React.FC<Props> = ({
   projectOwners,
   statuses,
   updateProject,
+  notifications,
+  addNotification,
+  removeNotification,
 }) => (
   <Template>
     <Style.Wrapper>
       <Container>
+        <Notifications
+          notifications={notifications}
+          removeNotification={removeNotification}
+        />
         <ProjectsFilter
           appliedFilters={appliedFilters}
           applyFilter={applyFilter}
@@ -51,6 +63,7 @@ const HomePage: React.FC<Props> = ({
           updateProject={updateProject}
           projectOwners={projectOwners}
           statuses={statuses}
+          addNotification={addNotification}
         />
       </Container>
     </Style.Wrapper>

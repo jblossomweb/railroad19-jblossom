@@ -10,10 +10,12 @@ import rootReducer from 'app/store/rootReducer';
 import Theme from 'app/theme';
 import { redirects, routes } from './routes';
 
-import projectsInitialState from 'app/store/projects/initialState';
+import initialProjects from 'app/store/projects/initialState';
+import initialNotifications from 'app/store/notifications/initialState';
 
 const store = composeStore(getInitialState({
-  projects: projectsInitialState,
+  projects: initialProjects,
+  notifications: initialNotifications,
 }), rootReducer);
 
 const App: React.FC = () => (
