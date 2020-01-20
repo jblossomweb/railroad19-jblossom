@@ -53,4 +53,36 @@ describe('store/Auth/action/creators', () => {
     });
   });
 
+  describe('updateProject', () => {
+    const key: number = 1;
+    const update: Partial<AppTypes.Project> = {
+      budget: 30000,
+    };
+    const action: actionTypes.Interface['PROJECTS_UPDATE_PROJECT'] = actionCreators
+      .updateProject(
+        key,
+        update,
+      )
+    ;
+    const expectedAction: actionTypes.Interface['PROJECTS_UPDATE_PROJECT'] = {
+      type: actionTypes.PROJECTS_UPDATE_PROJECT,
+      payload: {
+        key,
+        update,
+      }
+    };
+
+    it(`should return ${expectedAction.type} action type`, () => {
+      expect(action.type).toEqual(expectedAction.type);
+    });
+
+    it(`should return 'key' in action payload`, () => {
+      expect(action.payload.key).toEqual(expectedAction.payload.key);
+    });
+
+    it(`should return 'update' in action payload`, () => {
+      expect(action.payload.update).toEqual(expectedAction.payload.update);
+    });
+  });
+
 });

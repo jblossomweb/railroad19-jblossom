@@ -8,9 +8,29 @@ export const TableHeaderCell = styled(Table.HeaderCell)`
   position: relative;
 `;
 
+export const EditCellIcon = styled(Icon)`
+  cursor: pointer;
+  position: absolute;
+  top: 1.5em;
+  right: .25em;
+`;
+
 export const TableCell = styled(Table.Cell)`
+  position: relative;
   background: ${
     props => props['data-sorting'] ? palette.COLUMBIA : palette.WHITE
+  };
+  cursor: ${
+    props => props['data-editable'] ? `pointer` : `auto`
+  };
+  ${EditCellIcon} {
+    display: none;
+  }
+  :hover ${EditCellIcon} {
+    display: inline;
+  }
+  input::-webkit-calendar-picker-indicator {
+    display: none;
   }
 `;
 

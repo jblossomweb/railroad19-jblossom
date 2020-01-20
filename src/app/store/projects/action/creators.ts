@@ -26,3 +26,21 @@ export const removeFilter: (
     key,
   },
 });
+
+/*
+ * PROJECTS_UPDATE_PROJECT
+ */
+
+export const updateProject: (
+  key: number,
+  update: Partial<AppTypes.Project>,
+) => types.Interface['PROJECTS_UPDATE_PROJECT'] = (
+  key,
+  update,
+) => ({
+  type: types.PROJECTS_UPDATE_PROJECT,
+  payload: {
+    key,
+    update,
+  },
+});

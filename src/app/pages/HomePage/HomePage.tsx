@@ -12,19 +12,18 @@ import ProjectsFilter from 'app/components/organisms/ProjectsFilter';
 import * as Style from './HomePage.style';
 
 export interface Props {
-  allProjects: AppTypes.Projects,
-  filteredRows: AppTypes.Projects,
+  filteredRows: AppTypes.IndexedProjects,
   appliedFilters: AppTypes.ProjectFilters,
   visibleColumns: Array<keyof AppTypes.Project>,
-  divisions: string[],
-  projectOwners: string[],
-  statuses: string[],
+  divisions: Array<AppTypes.Project['division']>,
+  projectOwners: Array<AppTypes.Project['project_owner']>,
+  statuses: Array<AppTypes.Project['status']>,
   applyFilter: (filter: AppTypes.ProjectFilter) => void,
   removeFilter: (key: number) => void,
+  updateProject: (key: number, update: Partial<AppTypes.Project>) => void,
 };
 
 const HomePage: React.FC<Props> = ({
-  // allProjects,
   appliedFilters,
   applyFilter,
   removeFilter,
@@ -33,6 +32,7 @@ const HomePage: React.FC<Props> = ({
   divisions,
   projectOwners,
   statuses,
+  updateProject,
 }) => (
   <Template>
     <Style.Wrapper>
@@ -48,6 +48,9 @@ const HomePage: React.FC<Props> = ({
         <ProjectsTable
           projects={filteredRows}
           visibleColumns={visibleColumns}
+          updateProject={updateProject}
+          projectOwners={projectOwners}
+          statuses={statuses}
         />
       </Container>
     </Style.Wrapper>

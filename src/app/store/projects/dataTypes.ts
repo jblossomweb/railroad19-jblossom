@@ -2,7 +2,9 @@ import { List, Record } from 'immutable';
 import * as AppTypes from 'app/types';
 
 export type Project = Record<AppTypes.Project>;
+export type IndexedProject = Record<AppTypes.IndexedProject>;
 export type Projects = List<Project>;
+export type IndexedProjects = List<IndexedProject>;
 export const defaultProjects: Projects = List([]);
 
 export type SortColumn = string | undefined;

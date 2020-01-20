@@ -7,16 +7,16 @@ import { AppState } from 'core/store';
 import * as projectsActions from 'app/store/projects/action/creators';
 import * as projectsSelectors from 'app/store/projects/selectors';
 
-import { ProjectFilter } from 'app/types';
+import { Project, ProjectFilter } from 'app/types';
 
 import HomePage from './HomePage';
 
 export const mapStateToProps = (
   state: AppState,
 ) => ({
-  allProjects: projectsSelectors.getProjects(state),
   appliedFilters: projectsSelectors.getAppliedFilters(state),
   filteredRows: projectsSelectors.getFilteredRows(state),
+  visibleColumns: projectsSelectors.getVisibleColumns(state),
   divisions: projectsSelectors.getDivisions(state),
   projectOwners: projectsSelectors.getProjectOwners(state),
   statuses: projectsSelectors.getStatuses(state),
@@ -30,6 +30,12 @@ export const mapDispatchToProps = (
   ),
   removeFilter: (key: number) => dispatch(
     projectsActions.removeFilter(key),
+  ),
+  updateProject: (
+    key: number,
+    update: Partial<Project>,
+  ) => dispatch(
+    projectsActions.updateProject(key, update),
   ),
 });
 

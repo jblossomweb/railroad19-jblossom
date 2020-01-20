@@ -2,6 +2,7 @@ import { List } from 'immutable';
 import { createSelector } from 'reselect';
 import { AppState } from 'core/store';
 
+import * as AppTypes from 'app/types';
 import * as DataTypes from './dataTypes';
 import paths from './paths';
 
@@ -19,6 +20,27 @@ const getProjectsSelector = (
 export const getProjects = createSelector([
   getProjectsSelector,
 ], (projects: DataTypes.Projects) => projects);
+
+/*
+ * getIndexedProjects
+ */
+
+export const getIndexedProjects = createSelector([
+  getProjects,
+], (projects: DataTypes.Projects) => projects.map(
+  (
+    project: DataTypes.Project,
+    index: number,
+  ) => {
+    const indexedProject: DataTypes.IndexedProject = (
+      project as any
+    ).set(
+      'index',
+      index,
+    );
+    return indexedProject;
+  }
+));
 
 /*
  * getAppliedFilters
@@ -55,18 +77,18 @@ export const getVisibleColumns = createSelector([
  */
 
 export const getFilteredRows = createSelector([
-  getProjects,
+  getIndexedProjects,
   getAppliedFilters,
 ], (
-  allProjects: DataTypes.Projects,
+  indexedProjects: DataTypes.IndexedProjects,
   appliedFilters: DataTypes.AppliedFilters,
 ) => {
-  let filteredRows: DataTypes.Projects = allProjects;
+  let filteredRows: DataTypes.IndexedProjects = indexedProjects;
   appliedFilters?.forEach((
     appliedFilter: DataTypes.AppliedFilter,
   ) => {
     filteredRows = filteredRows.filter((
-      row: DataTypes.Project,
+      row: DataTypes.IndexedProject,
     ) => {
       const column = appliedFilter.get('column');
       const value = appliedFilter.get('value');
@@ -136,7 +158,7 @@ export const getProjectOwners = createSelector([
 export const getStatuses = createSelector([
   getProjects,
 ], (projects: DataTypes.Projects) => {
-  const statuses: List<string> = projects.map(
+  const statuses: List<AppTypes.Project['status']> = projects.map(
     (project: DataTypes.Project) => project.get('status')
   );
   return statuses.toSet();

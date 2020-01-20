@@ -17,8 +17,13 @@ export interface RawProject extends BaseProject {
   modified?: string | null,
 }
 
+export interface IndexedProject extends Project {
+  index: number,
+}
+
 export type Projects = Project[];
 export type RawProjects = RawProject[];
+export type IndexedProjects = IndexedProject[];
 
 export interface ProjectFilter {
   column: keyof Project,
