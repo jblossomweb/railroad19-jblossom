@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import sortBy from 'lodash/sortBy';
+import { Link } from 'react-router-dom';
 import {
   Table,
   Popup,
@@ -260,19 +261,6 @@ const ProjectsTable: React.FC<Props> = ({
                 data-sorting={sortColumn === column}
                 data-editable={editableColumns.includes(column)}
                 data-editing={editingIndex !== row.index}
-                onClick={() => {
-                  if (
-                    typeof editingIndex === 'undefined' &&
-                    editableColumns.includes(column)
-                  ) {
-                    setState({
-                      ...state,
-                      editingIndex: row.index,
-                      editingField: column,
-                      editingValue: String(row[column]),
-                    });
-                  }
-                }}
               >
                 {(
                   editableColumns.includes(column) &&
@@ -289,7 +277,27 @@ const ProjectsTable: React.FC<Props> = ({
                       <Style.EditCellIcon
                         size={`small`}
                         name={`pencil`}
+                        onClick={() => {
+                          if (
+                            typeof editingIndex === 'undefined'
+                          ) {
+                            setState({
+                              ...state,
+                              editingIndex: row.index,
+                              editingField: column,
+                              editingValue: String(row[column]),
+                            });
+                          }
+                        }}
                       />
+                    ) : null}
+                    {column === 'title' ? (
+                    <Link to={`project/${row.index}`}>
+                      <Style.EditCellIcon
+                        size={`small`}
+                        name={`eye`}
+                      />
+                    </Link>
                     ) : null}
                   </>
                 )}

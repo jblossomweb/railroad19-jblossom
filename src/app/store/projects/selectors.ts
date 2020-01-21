@@ -43,6 +43,18 @@ export const getIndexedProjects = createSelector([
 ));
 
 /*
+ * getIndexedProject
+ */
+
+export const getIndexedProject = createSelector([
+  getIndexedProjects,
+], (
+  projects: DataTypes.IndexedProjects,
+) => (
+  index: number,
+) => projects.get(index));
+
+/*
  * getAppliedFilters
  */
 

@@ -3,6 +3,7 @@ import { SemanticICONS } from 'semantic-ui-react';
 
 import Page404 from 'app/pages/404';
 import HomePage from 'app/pages/HomePage';
+import ProjectPage from 'app/pages/ProjectPage';
 
 export interface Route {
   path: string,
@@ -24,6 +25,10 @@ export const routes: Route[] = [
   {
     path: `/home`,
     page: HomePage,
+  },
+  {
+    path: `/project/:index`,
+    page: ProjectPage,
   },
   ...menu,
   {

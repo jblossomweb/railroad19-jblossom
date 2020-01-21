@@ -20,9 +20,6 @@ export const TableCell = styled(Table.Cell)`
   background: ${
     props => props['data-sorting'] ? palette.COLUMBIA : palette.WHITE
   };
-  cursor: ${
-    props => props['data-editable'] ? `pointer` : `auto`
-  };
   ${EditCellIcon} {
     display: none;
   }
