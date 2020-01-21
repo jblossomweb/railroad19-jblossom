@@ -7,6 +7,8 @@ import {
 import * as AppTypes from 'app/types';
 import Template from 'app/templates/LightCentered';
 
+import StatCards from 'app/components/molecules/StatCards';
+
 import Notifications from 'app/components/organisms/Notifications';
 import ProjectsTable from 'app/components/organisms/ProjectsTable';
 import ProjectsFilter from 'app/components/organisms/ProjectsFilter';
@@ -21,6 +23,7 @@ export interface Props {
   projectOwners: Array<AppTypes.Project['project_owner']>,
   statuses: Array<AppTypes.Project['status']>,
   notifications: AppTypes.Notifications,
+  stats: AppTypes.Statistics,
   applyFilter: (filter: AppTypes.ProjectFilter) => void,
   removeFilter: (key: number) => void,
   updateProject: (key: number, update: Partial<AppTypes.Project>) => void,
@@ -39,12 +42,16 @@ const HomePage: React.FC<Props> = ({
   statuses,
   updateProject,
   notifications,
+  stats,
   addNotification,
   removeNotification,
 }) => (
   <Template>
     <Style.Wrapper>
       <Container>
+        <StatCards
+          stats={stats}
+        />
         <Notifications
           notifications={notifications}
           removeNotification={removeNotification}

@@ -1,7 +1,7 @@
 import forEach from 'lodash/forEach';
 
 import { getTestScenes, mountScenes } from 'core/test';
-import { scenes } from './stories';
+import { scenes } from './ExternalLink.stories';
 import ExternalLink from '.';
 
 const testScenes = getTestScenes(

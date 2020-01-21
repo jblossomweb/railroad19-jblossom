@@ -25,6 +25,7 @@ export const mapStateToProps = (
   projectOwners: projectsSelectors.getProjectOwners(state),
   statuses: projectsSelectors.getStatuses(state),
   notifications: notificationsSelectors.getNotifications(state),
+  stats: projectsSelectors.getHomePageStatistics(state),
 });
 
 export const mapDispatchToProps = (

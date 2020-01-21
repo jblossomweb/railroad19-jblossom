@@ -45,3 +45,11 @@ export interface Notification {
 };
 
 export type Notifications = Notification[];
+
+export interface Statistic {
+  header?: string,
+  description?: string,
+  meta?: string,
+};
+
+export type Statistics = Statistic[];

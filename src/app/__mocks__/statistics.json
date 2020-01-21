@@ -1,0 +1,32 @@
+[
+  {
+    "header": "New",
+    "description": "43",
+    "meta": "projects"
+  },
+  {
+    "header": "Working",
+    "description": "43",
+    "meta": "projects"
+  },
+  {
+    "header": "Delivered",
+    "description": "43",
+    "meta": "projects"
+  },
+  {
+    "header": "Total Budget",
+    "description": "$43,777,123",
+    "meta": "43 projects"
+  },
+  {
+    "header": "Largest Project",
+    "description": "$23,123",
+    "meta": "Tagtune"
+  },
+  {
+    "header": "Top Project Owner",
+    "description": "$60,323",
+    "meta": "Kevin Snyder"
+  }
+]
