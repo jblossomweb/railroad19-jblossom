@@ -8,6 +8,7 @@ import * as AppTypes from 'app/types';
 import Template from 'app/templates/LightCentered';
 
 import StatCards from 'app/components/molecules/StatCards';
+import ProjectsButtons from 'app/components/molecules/ProjectsButtons';
 
 import Notifications from 'app/components/organisms/Notifications';
 import ProjectsTable from 'app/components/organisms/ProjectsTable';
@@ -71,6 +72,9 @@ const HomePage: React.FC<Props> = ({
           projectOwners={projectOwners}
           statuses={statuses}
           addNotification={addNotification}
+        />
+        <ProjectsButtons
+          projects={filteredRows}
         />
       </Container>
     </Style.Wrapper>
