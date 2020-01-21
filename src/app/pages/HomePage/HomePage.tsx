@@ -1,11 +1,8 @@
 import React from 'react';
-import {
-  Container,
-  SemanticICONS,
-} from 'semantic-ui-react';
+import { SemanticICONS } from 'semantic-ui-react';
 
 import * as AppTypes from 'app/types';
-import Template from 'app/templates/LightCentered';
+import Template from 'app/templates/FixedMenu';
 
 import StatCards from 'app/components/molecules/StatCards';
 import ProjectsButtons from 'app/components/molecules/ProjectsButtons';
@@ -49,34 +46,32 @@ const HomePage: React.FC<Props> = ({
 }) => (
   <Template>
     <Style.Wrapper>
-      <Container>
-        <StatCards
-          stats={stats}
-        />
-        <Notifications
-          notifications={notifications}
-          removeNotification={removeNotification}
-        />
-        <ProjectsFilter
-          appliedFilters={appliedFilters}
-          applyFilter={applyFilter}
-          removeFilter={removeFilter}
-          divisions={divisions}
-          projectOwners={projectOwners}
-          statuses={statuses}
-        />
-        <ProjectsTable
-          projects={filteredRows}
-          visibleColumns={visibleColumns}
-          updateProject={updateProject}
-          projectOwners={projectOwners}
-          statuses={statuses}
-          addNotification={addNotification}
-        />
-        <ProjectsButtons
-          projects={filteredRows}
-        />
-      </Container>
+      <StatCards
+        stats={stats}
+      />
+      <Notifications
+        notifications={notifications}
+        removeNotification={removeNotification}
+      />
+      <ProjectsFilter
+        appliedFilters={appliedFilters}
+        applyFilter={applyFilter}
+        removeFilter={removeFilter}
+        divisions={divisions}
+        projectOwners={projectOwners}
+        statuses={statuses}
+      />
+      <ProjectsTable
+        projects={filteredRows}
+        visibleColumns={visibleColumns}
+        updateProject={updateProject}
+        projectOwners={projectOwners}
+        statuses={statuses}
+        addNotification={addNotification}
+      />
+      <ProjectsButtons
+        projects={filteredRows}
+      />
     </Style.Wrapper>
   </Template>
 );

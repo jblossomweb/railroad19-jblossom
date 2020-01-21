@@ -4,7 +4,7 @@ import {
 } from 'semantic-ui-react';
 
 import * as AppTypes from 'app/types';
-import Template from 'app/templates/LightCentered';
+import Template from 'app/templates/FixedMenu';
 
 import * as Style from './ProjectPage.style';
 

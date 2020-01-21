@@ -1,8 +1,20 @@
-# RailRoad19
+# Project Dashboard
 
 ![](https://i.giphy.com/media/cU7jXQjldnZ7y/giphy.webp)
 
-UI/UX Code Challenge.
+RailRoad19 UI/UX Code Challenge
+
+demo: [https://railroad19-jblossom.firebaseapp.com/](https://railroad19-jblossom.firebaseapp.com/)
+
+# Getting Started
+
+3 easy steps (all are important):
+
+- `cp .env.example .env`
+- `yarn`
+- `yarn start`
+
+Then open your browser to [http://localhost:3000](http://localhost:3000)
 
 # Available Scripts
 
